@@ -93,6 +93,19 @@ function App() {
       </section>
 
       <section
+  	style={{
+    	marginTop: "24px",
+    	padding: "20px",
+    	border: "1px solid #ccc",
+    	borderRadius: "12px",
+    	backgroundColor: "#f9f9ff",
+  	  }}
+	>
+  	<h2>Model Excerpt</h2>
+  	<p>{currentPaper.excerpt}</p>
+	</section>
+
+      <section
         style={{
           marginTop: "24px",
           padding: "20px",

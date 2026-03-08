@@ -6,6 +6,7 @@ export type Paper = {
   taskType: "intro" | "results"
   task: string
   points: string[]
+  excerpt: string
 }
 
 export const papers: Paper[] = [
@@ -21,6 +22,8 @@ export const papers: Paper[] = [
       "Explain the research question.",
       "Briefly preview the identification strategy.",
     ],
+    excerpt:
+      "Good economics introductions usually motivate why education matters for labor-market outcomes, state the causal question precisely, and briefly preview the empirical strategy.",
   },
   {
     title: "Colonial Origins of Comparative Development",
@@ -34,6 +37,8 @@ export const papers: Paper[] = [
       "State the main research question clearly.",
       "Briefly preview the institutional argument.",
     ],
+    excerpt:
+      "A strong opening here would highlight persistent cross-country income differences, introduce the institutional explanation, and indicate why historical variation helps identify long-run effects.",
   },
   {
     title: "The Colonial Origins of Comparative Development: An Empirical Investigation",
@@ -47,5 +52,7 @@ export const papers: Paper[] = [
       "Interpret the sign and magnitude.",
       "Avoid overclaiming beyond the evidence.",
     ],
+    excerpt:
+      "A good results paragraph should begin with the central empirical finding, describe the direction and practical size of the effect, and then comment carefully on significance without overstating causality.",
   },
 ]
