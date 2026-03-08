@@ -10,6 +10,8 @@ function App() {
 
   const currentPaper = papers[paperIndex]
 
+  const wordCount = draft.trim() === "" ? 0 : draft.trim().split(/\s+/).length
+
   const feedback = useMemo(
     () => evaluateDraft(draft, currentPaper.taskType),
     [draft, currentPaper.taskType]
@@ -171,22 +173,43 @@ function App() {
                 resize: "vertical",
               }}
             />
+		
+	   <p style={{ marginTop: "12px", marginBottom: 0 }}>
+  	   <strong>Word count:</strong> {wordCount}
+           </p>
 
-            <div style={{ marginTop: "16px" }}>
-              <button
-                onClick={() => setSubmitted(true)}
-                style={{
-                  padding: "10px 16px",
-                  fontSize: "16px",
-                  borderRadius: "8px",
-                  border: "1px solid #999",
-                  cursor: "pointer",
-                  backgroundColor: "#fff",
-                }}
-              >
-                Evaluate Draft
-              </button>
-            </div>
+            <div style={{ marginTop: "16px", display: "flex", gap: "12px" }}>
+  	    <button
+    	    onClick={() => setSubmitted(true)}
+            style={{
+      	    padding: "10px 16px",
+      	    fontSize: "16px",
+      	    borderRadius: "8px",
+      	    border: "1px solid #999",
+      	    cursor: "pointer",
+      	    backgroundColor: "#fff",
+    	    }}
+  	    >
+    	   Evaluate Draft
+  	   </button>
+
+  	   <button
+    	   onClick={() => {
+      	   setDraft("")
+      	   setSubmitted(false)
+    	   }}
+    	   style={{
+      	   padding: "10px 16px",
+      	   fontSize: "16px",
+      	   borderRadius: "8px",
+      	   border: "1px solid #999",
+      	   cursor: "pointer",
+      	   backgroundColor: "#fff",
+    	   }}
+  	   >
+    	   Clear Draft
+  	   </button>
+	  </div>
           </section>
 
           <section
