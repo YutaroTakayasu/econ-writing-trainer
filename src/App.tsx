@@ -11,9 +11,9 @@ function App() {
   const currentPaper = papers[paperIndex]
 
   const feedback = useMemo(
-  () => evaluateDraft(draft, currentPaper.taskType),
-  [draft, currentPaper.taskType]
-)
+    () => evaluateDraft(draft, currentPaper.taskType),
+    [draft, currentPaper.taskType]
+  )
 
   const goToNextPaper = () => {
     const nextIndex = (paperIndex + 1) % papers.length
@@ -26,132 +26,199 @@ function App() {
   return (
     <main
       style={{
-        maxWidth: "1000px",
+        maxWidth: "1200px",
         margin: "0 auto",
-        padding: "40px 20px",
+        padding: "32px 20px 48px",
         fontFamily: "Arial, sans-serif",
         lineHeight: 1.6,
+        color: "#222",
       }}
     >
-      <h1>Economics Writing Trainer</h1>
-      <p>Practice introductions and results writing for economics papers.</p>
+      <header style={{ marginBottom: "24px" }}>
+        <h1 style={{ marginBottom: "8px" }}>Economics Writing Trainer</h1>
+        <p style={{ margin: 0 }}>
+          Practice introductions and results writing for economics papers.
+        </p>
+      </header>
 
-      <section
+      <div
         style={{
-          marginTop: "32px",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "12px",
+          display: "grid",
+          gridTemplateColumns: "1fr 1.2fr",
+          gap: "24px",
+          alignItems: "start",
         }}
       >
-        <h2>Sample Paper</h2>
-        <p>
-          <strong>Title:</strong> {currentPaper.title}
-        </p>
-        <p>
-          <strong>Authors:</strong> {currentPaper.authors}
-        </p>
-        <p>
-          <strong>Year:</strong> {currentPaper.year}
-        </p>
-        <p>
-          <strong>Field:</strong> {currentPaper.field}
-        </p>
-	<p>
-  	  <strong>Task Type:</strong> {currentPaper.taskType}
-	</p>
-
-        <div style={{ marginTop: "16px" }}>
-          <button
-            onClick={goToNextPaper}
+        <div>
+          <section
             style={{
-              padding: "10px 16px",
-              fontSize: "16px",
-              borderRadius: "8px",
-              border: "1px solid #999",
-              cursor: "pointer",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              backgroundColor: "#fff",
             }}
           >
-            Next Paper
-          </button>
-        </div>
-      </section>
-
-      <section
-        style={{
-          marginTop: "24px",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "12px",
-        }}
-      >
-        <h2>Writing Task</h2>
-        <p>{currentPaper.task}</p>
-        <ul>
-          {currentPaper.points.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section
-  	style={{
-    	marginTop: "24px",
-    	padding: "20px",
-    	border: "1px solid #ccc",
-    	borderRadius: "12px",
-    	backgroundColor: "#f9f9ff",
-  	  }}
-	>
-  	<h2>Model Excerpt</h2>
-
-  	<button
-    	onClick={() => setShowExcerpt((prev) => !prev)}
-    	style={{
-      	padding: "10px 16px",
-      	fontSize: "16px",
-      	borderRadius: "8px",
-      	border: "1px solid #999",
-      	cursor: "pointer",
-      	marginBottom: "12px",
-    	}}
-  	>
-    	{showExcerpt ? "Hide Excerpt" : "Show Excerpt"}
-  	</button>
-
-  	{showExcerpt ? (
-    	<p>{currentPaper.excerpt}</p>
-  	) : (
-    	<p>The model excerpt is hidden. Try writing first, then reveal it.</p>
-  	)}
-	</section>
-
-      <section
-        style={{
-          marginTop: "24px",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "12px",
-          backgroundColor: "#f8f8f8",
-        }}
-      >
-        <h2>Feedback Preview</h2>
-
-        {!submitted ? (
-          <p>Click “Evaluate Draft” to see feedback.</p>
-        ) : (
-          <>
+            <h2 style={{ marginTop: 0 }}>Sample Paper</h2>
             <p>
-              <strong>Score:</strong> {feedback.score} / 100
+              <strong>Title:</strong> {currentPaper.title}
             </p>
-            <ul>
-              {feedback.comments.map((comment) => (
-                <li key={comment}>{comment}</li>
+            <p>
+              <strong>Authors:</strong> {currentPaper.authors}
+            </p>
+            <p>
+              <strong>Year:</strong> {currentPaper.year}
+            </p>
+            <p>
+              <strong>Field:</strong> {currentPaper.field}
+            </p>
+            <p>
+              <strong>Task Type:</strong> {currentPaper.taskType}
+            </p>
+
+            <div style={{ marginTop: "16px" }}>
+              <button
+                onClick={goToNextPaper}
+                style={{
+                  padding: "10px 16px",
+                  fontSize: "16px",
+                  borderRadius: "8px",
+                  border: "1px solid #999",
+                  cursor: "pointer",
+                  backgroundColor: "#fff",
+                }}
+              >
+                Next Paper
+              </button>
+            </div>
+          </section>
+
+          <section
+            style={{
+              marginTop: "20px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              backgroundColor: "#fff",
+            }}
+          >
+            <h2 style={{ marginTop: 0 }}>Writing Task</h2>
+            <p>{currentPaper.task}</p>
+            <ul style={{ paddingLeft: "20px", marginBottom: 0 }}>
+              {currentPaper.points.map((point) => (
+                <li key={point}>{point}</li>
               ))}
             </ul>
-          </>
-        )}
-      </section>
+          </section>
+
+          <section
+            style={{
+              marginTop: "20px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              backgroundColor: "#f9f9ff",
+            }}
+          >
+            <h2 style={{ marginTop: 0 }}>Model Excerpt</h2>
+
+            <button
+              onClick={() => setShowExcerpt((prev) => !prev)}
+              style={{
+                padding: "10px 16px",
+                fontSize: "16px",
+                borderRadius: "8px",
+                border: "1px solid #999",
+                cursor: "pointer",
+                marginBottom: "12px",
+                backgroundColor: "#fff",
+              }}
+            >
+              {showExcerpt ? "Hide Excerpt" : "Show Excerpt"}
+            </button>
+
+            {showExcerpt ? (
+              <p style={{ marginBottom: 0 }}>{currentPaper.excerpt}</p>
+            ) : (
+              <p style={{ marginBottom: 0 }}>
+                The model excerpt is hidden. Try writing first, then reveal it.
+              </p>
+            )}
+          </section>
+        </div>
+
+        <div>
+          <section
+            style={{
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              backgroundColor: "#fff",
+            }}
+          >
+            <h2 style={{ marginTop: 0 }}>Your Draft</h2>
+            <textarea
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder="Write here..."
+              rows={16}
+              style={{
+                width: "100%",
+                padding: "12px",
+                fontSize: "16px",
+                borderRadius: "8px",
+                border: "1px solid #bbb",
+                boxSizing: "border-box",
+                resize: "vertical",
+              }}
+            />
+
+            <div style={{ marginTop: "16px" }}>
+              <button
+                onClick={() => setSubmitted(true)}
+                style={{
+                  padding: "10px 16px",
+                  fontSize: "16px",
+                  borderRadius: "8px",
+                  border: "1px solid #999",
+                  cursor: "pointer",
+                  backgroundColor: "#fff",
+                }}
+              >
+                Evaluate Draft
+              </button>
+            </div>
+          </section>
+
+          <section
+            style={{
+              marginTop: "20px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              backgroundColor: "#f8f8f8",
+            }}
+          >
+            <h2 style={{ marginTop: 0 }}>Feedback Preview</h2>
+
+            {!submitted ? (
+              <p style={{ marginBottom: 0 }}>
+                Click “Evaluate Draft” to see feedback.
+              </p>
+            ) : (
+              <>
+                <p>
+                  <strong>Score:</strong> {feedback.score} / 100
+                </p>
+                <ul style={{ paddingLeft: "20px", marginBottom: 0 }}>
+                  {feedback.comments.map((comment) => (
+                    <li key={comment}>{comment}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+        </div>
+      </div>
     </main>
   )
 }
