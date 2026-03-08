@@ -9,7 +9,10 @@ function App() {
 
   const currentPaper = papers[paperIndex]
 
-  const feedback = useMemo(() => evaluateDraft(draft), [draft])
+  const feedback = useMemo(
+  () => evaluateDraft(draft, currentPaper.taskType),
+  [draft, currentPaper.taskType]
+)
 
   const goToNextPaper = () => {
     const nextIndex = (paperIndex + 1) % papers.length
@@ -52,6 +55,9 @@ function App() {
         <p>
           <strong>Field:</strong> {currentPaper.field}
         </p>
+	<p>
+  	  <strong>Task Type:</strong> {currentPaper.taskType}
+	</p>
 
         <div style={{ marginTop: "16px" }}>
           <button

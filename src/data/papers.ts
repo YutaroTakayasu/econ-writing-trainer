@@ -3,6 +3,7 @@ export type Paper = {
   authors: string
   year: number
   field: string
+  taskType: "intro" | "results"
   task: string
   points: string[]
 }
@@ -13,6 +14,7 @@ export const papers: Paper[] = [
     authors: "Joshua D. Angrist and Alan B. Krueger",
     year: 1991,
     field: "Labor Economics",
+    taskType: "intro",
     task: "Write a 4–6 sentence introduction opening for this paper.",
     points: [
       "State the broad motivation clearly.",
@@ -25,6 +27,7 @@ export const papers: Paper[] = [
     authors: "Daron Acemoglu, Simon Johnson, and James A. Robinson",
     year: 2001,
     field: "Political Economy",
+    taskType: "intro",
     task: "Write a 4–6 sentence introduction opening for this paper.",
     points: [
       "Explain why long-run development differences matter.",
@@ -37,6 +40,7 @@ export const papers: Paper[] = [
     authors: "Daron Acemoglu, Simon Johnson, and James A. Robinson",
     year: 2001,
     field: "Economic History / Development",
+    taskType: "results",
     task: "Write a short results paragraph describing the main finding.",
     points: [
       "State the main result first.",
