@@ -6,6 +6,7 @@ function App() {
   const [paperIndex, setPaperIndex] = useState(0)
   const [draft, setDraft] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [showExcerpt, setShowExcerpt] = useState(false)
 
   const currentPaper = papers[paperIndex]
 
@@ -19,6 +20,7 @@ function App() {
     setPaperIndex(nextIndex)
     setDraft("")
     setSubmitted(false)
+    setShowExcerpt(false)
   }
 
   return (
@@ -102,48 +104,27 @@ function App() {
   	  }}
 	>
   	<h2>Model Excerpt</h2>
-  	<p>{currentPaper.excerpt}</p>
+
+  	<button
+    	onClick={() => setShowExcerpt((prev) => !prev)}
+    	style={{
+      	padding: "10px 16px",
+      	fontSize: "16px",
+      	borderRadius: "8px",
+      	border: "1px solid #999",
+      	cursor: "pointer",
+      	marginBottom: "12px",
+    	}}
+  	>
+    	{showExcerpt ? "Hide Excerpt" : "Show Excerpt"}
+  	</button>
+
+  	{showExcerpt ? (
+    	<p>{currentPaper.excerpt}</p>
+  	) : (
+    	<p>The model excerpt is hidden. Try writing first, then reveal it.</p>
+  	)}
 	</section>
-
-      <section
-        style={{
-          marginTop: "24px",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "12px",
-        }}
-      >
-        <h2>Your Draft</h2>
-        <textarea
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder="Write here..."
-          rows={12}
-          style={{
-            width: "100%",
-            padding: "12px",
-            fontSize: "16px",
-            borderRadius: "8px",
-            border: "1px solid #bbb",
-            boxSizing: "border-box",
-          }}
-        />
-
-        <div style={{ marginTop: "16px" }}>
-          <button
-            onClick={() => setSubmitted(true)}
-            style={{
-              padding: "10px 16px",
-              fontSize: "16px",
-              borderRadius: "8px",
-              border: "1px solid #999",
-              cursor: "pointer",
-            }}
-          >
-            Evaluate Draft
-          </button>
-        </div>
-      </section>
 
       <section
         style={{
