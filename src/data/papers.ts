@@ -7,7 +7,7 @@ export type Paper = {
   license: string
   sourceUrl: string
   abstract: string
-  taskType: "intro"
+  taskType: "intro" | "results"
   task: string
   points: string[]
   excerpt: string
