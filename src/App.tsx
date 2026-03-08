@@ -3,10 +3,11 @@ import { papers } from "./data/papers"
 import { evaluateDraft } from "./lib/evaluate"
 
 function App() {
-  const [paperIndex, setPaperIndex] = useState(0)
-  const [draft, setDraft] = useState("")
-  const [submitted, setSubmitted] = useState(false)
-  const [showExcerpt, setShowExcerpt] = useState(false)
+const [paperIndex, setPaperIndex] = useState(0)
+const [draft, setDraft] = useState("")
+const [submitted, setSubmitted] = useState(false)
+const [showExcerpt, setShowExcerpt] = useState(false)
+const [showAbstract, setShowAbstract] = useState(false)
 
   const currentPaper = papers[paperIndex]
 
@@ -17,13 +18,14 @@ function App() {
     [draft, currentPaper.taskType]
   )
 
-  const goToNextPaper = () => {
-    const nextIndex = (paperIndex + 1) % papers.length
-    setPaperIndex(nextIndex)
-    setDraft("")
-    setSubmitted(false)
-    setShowExcerpt(false)
-  }
+const goToNextPaper = () => {
+  const nextIndex = (paperIndex + 1) % papers.length
+  setPaperIndex(nextIndex)
+  setDraft("")
+  setSubmitted(false)
+  setShowExcerpt(false)
+  setShowAbstract(false)
+}
   const goToRandomPaper = () => {
   if (papers.length <= 1) return
 
@@ -37,6 +39,7 @@ function App() {
   setDraft("")
   setSubmitted(false)
   setShowExcerpt(false)
+  setShowAbstract(false)
   }
 
   return (
@@ -155,6 +158,41 @@ function App() {
               ))}
             </ul>
           </section>
+
+<section
+  style={{
+    marginTop: "20px",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "12px",
+    backgroundColor: "#f9fff9",
+  }}
+>
+  <h2 style={{ marginTop: 0 }}>Abstract</h2>
+
+  <button
+    onClick={() => setShowAbstract((prev) => !prev)}
+    style={{
+      padding: "10px 16px",
+      fontSize: "16px",
+      borderRadius: "8px",
+      border: "1px solid #999",
+      cursor: "pointer",
+      marginBottom: "12px",
+      backgroundColor: "#fff",
+    }}
+  >
+    {showAbstract ? "Hide Abstract" : "Show Abstract"}
+  </button>
+
+  {showAbstract ? (
+    <p style={{ marginBottom: 0 }}>{currentPaper.abstract}</p>
+  ) : (
+    <p style={{ marginBottom: 0 }}>
+      The abstract is hidden. Reveal it when you want more context.
+    </p>
+  )}
+</section>
 
           <section
             style={{
