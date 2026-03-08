@@ -87,6 +87,22 @@ function App() {
             <p>
               <strong>Field:</strong> {currentPaper.field}
             </p>
+	    <p>
+  <strong>Journal:</strong> {currentPaper.journal}
+</p>
+<p>
+  <strong>License:</strong> {currentPaper.license}
+</p>
+<p>
+  <strong>Source:</strong>{" "}
+  <a
+    href={currentPaper.sourceUrl}
+    target="_blank"
+    rel="noreferrer"
+  >
+    Open article
+  </a>
+</p>
             <p>
               <strong>Task Type:</strong> {currentPaper.taskType}
             </p>
