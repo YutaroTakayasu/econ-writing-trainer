@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <main style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 20px" }}>
+      <h1>Economics Writing Trainer</h1>
+      <p>
+        Practice writing introductions and results sections for economics papers.
       </p>
-    </>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2>What this app will do</h2>
+        <ul>
+          <li>Show a representative economics paper</li>
+          <li>Let you practice writing an introduction or results paragraph</li>
+          <li>Evaluate your writing with a rubric</li>
+        </ul>
+      </section>
+
+      <section style={{ marginTop: "32px" }}>
+        <h2>Next step</h2>
+        <p>
+          We will add a paper card, a writing box, and a feedback panel.
+        </p>
+      </section>
+    </main>
   )
 }
 
