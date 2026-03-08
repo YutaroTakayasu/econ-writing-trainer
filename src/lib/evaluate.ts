@@ -2,7 +2,8 @@ export type TaskType = "intro" | "results"
 
 export type EvaluationResult = {
   score: number
-  comments: string[]
+  strengths: string[]
+  improvements: string[]
 }
 
 export function evaluateDraft(
@@ -14,13 +15,14 @@ export function evaluateDraft(
   const wordCount = text === "" ? 0 : text.split(/\s+/).length
 
   let score = 0
-  const comments: string[] = []
+  const strengths: string[] = []
+  const improvements: string[] = []
 
   if (wordCount >= 60) {
     score += 25
-    comments.push("Length looks reasonable for a short economics paragraph.")
+    strengths.push("Length looks reasonable for a short economics paragraph.")
   } else {
-    comments.push("The draft is still short. Add more complete sentences.")
+    improvements.push("The draft is still short. Add more complete sentences.")
   }
 
   if (taskType === "intro") {
@@ -30,9 +32,11 @@ export function evaluateDraft(
       lower.includes("we examine")
     ) {
       score += 25
-      comments.push("You state the research question in an intro-style way.")
+      strengths.push("You state the research question in an intro-style way.")
     } else {
-      comments.push("Make the introduction more explicit about the research question.")
+      improvements.push(
+        "Make the introduction more explicit about the research question."
+      )
     }
 
     if (
@@ -42,9 +46,9 @@ export function evaluateDraft(
       lower.includes("strategy")
     ) {
       score += 25
-      comments.push("You preview the empirical strategy or mechanism.")
+      strengths.push("You preview the empirical strategy or mechanism.")
     } else {
-      comments.push("Add a brief preview of the method or mechanism.")
+      improvements.push("Add a brief preview of the method or mechanism.")
     }
 
     if (
@@ -55,9 +59,9 @@ export function evaluateDraft(
       lower.includes("income")
     ) {
       score += 25
-      comments.push("The introduction is tied to a concrete economic outcome.")
+      strengths.push("The introduction is tied to a concrete economic outcome.")
     } else {
-      comments.push("Name the main economic outcome more explicitly.")
+      improvements.push("Name the main economic outcome more explicitly.")
     }
   }
 
@@ -69,9 +73,9 @@ export function evaluateDraft(
       lower.includes("our estimates")
     ) {
       score += 25
-      comments.push("You lead with the main empirical finding.")
+      strengths.push("You lead with the main empirical finding.")
     } else {
-      comments.push("Start the paragraph with the main result more directly.")
+      improvements.push("Start the paragraph with the main result more directly.")
     }
 
     if (
@@ -82,9 +86,9 @@ export function evaluateDraft(
       lower.includes("effect")
     ) {
       score += 25
-      comments.push("You interpret the sign or direction of the result.")
+      strengths.push("You interpret the sign or direction of the result.")
     } else {
-      comments.push("Explain whether the estimated effect is positive or negative.")
+      improvements.push("Explain whether the estimated effect is positive or negative.")
     }
 
     if (
@@ -94,11 +98,11 @@ export function evaluateDraft(
       lower.includes("economically")
     ) {
       score += 25
-      comments.push("You discuss significance or magnitude.")
+      strengths.push("You discuss significance or magnitude.")
     } else {
-      comments.push("Comment on statistical or economic significance.")
+      improvements.push("Comment on statistical or economic significance.")
     }
   }
 
-  return { score, comments }
+  return { score, strengths, improvements }
 }

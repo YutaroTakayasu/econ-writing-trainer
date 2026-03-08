@@ -24,6 +24,20 @@ function App() {
     setSubmitted(false)
     setShowExcerpt(false)
   }
+  const goToRandomPaper = () => {
+  if (papers.length <= 1) return
+
+  let nextIndex = paperIndex
+
+  while (nextIndex === paperIndex) {
+    nextIndex = Math.floor(Math.random() * papers.length)
+  }
+
+  setPaperIndex(nextIndex)
+  setDraft("")
+  setSubmitted(false)
+  setShowExcerpt(false)
+  }
 
   return (
     <main
@@ -77,21 +91,35 @@ function App() {
               <strong>Task Type:</strong> {currentPaper.taskType}
             </p>
 
-            <div style={{ marginTop: "16px" }}>
-              <button
-                onClick={goToNextPaper}
-                style={{
-                  padding: "10px 16px",
-                  fontSize: "16px",
-                  borderRadius: "8px",
-                  border: "1px solid #999",
-                  cursor: "pointer",
-                  backgroundColor: "#fff",
-                }}
-              >
-                Next Paper
-              </button>
-            </div>
+            <div style={{ marginTop: "16px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+  <button
+    onClick={goToNextPaper}
+    style={{
+      padding: "10px 16px",
+      fontSize: "16px",
+      borderRadius: "8px",
+      border: "1px solid #999",
+      cursor: "pointer",
+      backgroundColor: "#fff",
+    }}
+  >
+    Next Paper
+  </button>
+
+  <button
+    onClick={goToRandomPaper}
+    style={{
+      padding: "10px 16px",
+      fontSize: "16px",
+      borderRadius: "8px",
+      border: "1px solid #999",
+      cursor: "pointer",
+      backgroundColor: "#fff",
+    }}
+  >
+    Random Paper
+  </button>
+</div>
           </section>
 
           <section
@@ -229,15 +257,36 @@ function App() {
               </p>
             ) : (
               <>
-                <p>
-                  <strong>Score:</strong> {feedback.score} / 100
-                </p>
-                <ul style={{ paddingLeft: "20px", marginBottom: 0 }}>
-                  {feedback.comments.map((comment) => (
-                    <li key={comment}>{comment}</li>
-                  ))}
-                </ul>
-              </>
+  <p>
+    <strong>Score:</strong> {feedback.score} / 100
+  </p>
+
+  <div style={{ marginTop: "16px" }}>
+    <h3 style={{ marginBottom: "8px" }}>Strengths</h3>
+    {feedback.strengths.length === 0 ? (
+      <p style={{ marginTop: 0 }}>No strengths identified yet.</p>
+    ) : (
+      <ul style={{ paddingLeft: "20px" }}>
+        {feedback.strengths.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+  <div style={{ marginTop: "16px" }}>
+    <h3 style={{ marginBottom: "8px" }}>Improvements</h3>
+    {feedback.improvements.length === 0 ? (
+      <p style={{ marginTop: 0 }}>No major improvements suggested.</p>
+    ) : (
+      <ul style={{ paddingLeft: "20px", marginBottom: 0 }}>
+        {feedback.improvements.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+</>
             )}
           </section>
         </div>
